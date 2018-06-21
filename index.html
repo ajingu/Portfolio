@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Ajingu Gallery</title>
+        <meta name="description" content="Ajingu's Portfolio">
+        <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+        <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
+        <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
+        <script src="https://npmcdn.com/aframe-layout-component@3.0.1"></script>
+        <script src="https://npmcdn.com/aframe-template-component@3.1.1"></script>
+        <script src="https://unpkg.com/aframe-text-geometry-component@^0.5.0/dist/aframe-text-geometry-component.min.js"></script> 
+        <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
+        <script src="set-container-color.js"></script>
+
+    </head>
+    <body>
+        <a-scene>
+            <a-assets>
+                <img id="map3d" src="Images/3dmap.png">
+                <img id="realsense" src="Images/realsense.png">
+
+                <img id="wood-floor-img" src="Textures/wood-floor.jpg">
+                <img id="sky-img" src="Textures/sky_lightblue.jpg">
+                <img id="ground-img" src="Textures/stone.jpg">
+                <img id="wood-wall-img" src="Textures/wood-wall.jpg">
+
+                <a-asset-item id="indieFlower" src="Fonts/IndieFlower.json"></a-asset-item>
+
+                <script id="panelTemplate" type="text/html">
+                    <a-gui-flex-container set-container-color gui-interactable
+                        width="3" height="2.25"
+                        color="#22252a" transparent="true" opacity="0.5">
+
+                        <a-entity
+                            position="-1 0.9 0.01" 
+                            material="color: ${color}; metalness: 0.5; roughness: 0.5"
+                            text-geometry="value: ${title}; size: 0.5; font: #indieFlower; bevelEnabled: true; bevelSize: 0.0001; bevelThickness: 0.01">
+                        </a-entity>
+
+                        <a-image 
+                            position="0 0 0.01" width="2.2" height="1.4" 
+                            src=${thumb}>
+                        </a-image>
+                    </a-gui-flex-container>
+                </script>
+            </a-assets>
+
+            <a-sky id="sky" position="0 55 0" radius="60" src="#sky-img"></a-sky>
+            <a-plane id="ground" position="0 0 0" rotation="-90 0 0" width="25" height="25" material="src: #ground-img; repeat: 10 10"></a-plane>
+
+            <a-plane position="0 0.01 0" rotation="-90 0 0" width="20" height="20"  material="src: #wood-floor-img; repeat: 10 10"></a-plane>
+            
+            <a-entity id="panels" layout="type: line; margin: 4" position="0 2 -3">
+                <a-entity template="src: #panelTemplate" data-title="3DMap" data-color="#FF0000" data-thumb="#map3d"></a-entity>
+                <a-entity template="src: #panelTemplate" data-title="RealSense" data-color="#00FF00" data-thumb="#realsense"></a-entity>
+            </a-entity>
+
+            <a-camera look-controls wasd-controls>
+                <a-gui-cursor id="cursor" 
+                        raycaster="interval: 200; objects: [gui-interactable]"
+                        design="dot">
+                </a-gui-cursor>
+            </a-camera>
+
+        </a-scene>
+    </body>
+</html>
