@@ -17,15 +17,74 @@
     <body>
         <a-scene>
             <a-assets>
+                <!--image-->
                 <img id="map3d" src="Images/3dmap.png">
                 <img id="realsense" src="Images/realsense.png">
 
-                <img id="wood-floor-img" src="Textures/wood-floor.jpg">
+                <!--texture-->
                 <img id="sky-img" src="Textures/sky_lightblue.jpg">
-                <img id="ground-img" src="Textures/stone.jpg">
+                <img id="wood-floor-img" src="Textures/wood-floor.jpg">
                 <img id="wood-wall-img" src="Textures/wood-wall.jpg">
+                
+                <!--font-->
+                <a-asset-item id="indieFlower" src="Fonts/IndieFlower.json"></a-asset-item>         
 
-                <a-asset-item id="indieFlower" src="Fonts/IndieFlower.json"></a-asset-item>
+                <!--house components-->
+                <script id="inner-wall" type="text/html">                    
+                    <a-box position="${width/3} ${height/2} 0" scale="${width/3} ${height} 0.5">
+                        <a-box material="src: #wood-wall-img" position="0 -0.5 0" scale="1.02 0.05 1.02"></a-box>
+                    </a-box>
+                    <a-box position="0 ${height * 5 / 6} 0" scale="${width/3} ${height/3} 0.5"></a-box>
+                    <a-box position="${-width/3} ${height/2} 0" scale="${width/3} ${height} 0.5">
+                        <a-box material="src: #wood-wall-img" position="0 -0.5 0" scale="1.02 0.05 1.02"></a-box>
+                    </a-box>
+                </script>
+
+                <script id="outer-wall" type="text/html">
+                    <a-box material="color: #FFF;" position="0 0 0" scale="${width} ${height} 0.1">
+                        <a-box material="src: #wood-wall-img" position="0 -0.5 0.2" scale="1 0.05 1"></a-box>
+                    </a-box>
+                </script>
+
+                <script id="ductrail" type="text/html">
+                    <a-box position="0 ${-above} 0" scale="0.2 0.1 ${length * 0.8}"></a-box>
+                    <a-cylinder position="0 ${-above/2} ${-length/4}" radius="0.04" height="${above}"></a-cylinder>
+                    <a-cylinder position="0 ${-above/2} ${length/4}" radius="0.04" height="${above}"></a-cylinder>
+                </script>
+
+                <script id="spotlight" type="text/html">
+                    <a-cylinder radius="0.1" height="0.2">
+                        <a-light type="spot" angle="30" distance="5.0" intensity="2.0" color="#EAE9D0" position="0 -0.1 0" rotation="-90 0 0"></a-light>
+                    </a-cylinder>
+                </script>
+                
+
+                <!--house-->
+                <script id="houseTemplate" type="text/html">
+                    <!--floor-->
+                    <a-plane position="0 0 0" rotation="-90 0 0" width=${xlen} height=${zlen}  material="src: #wood-floor-img; repeat:${xlen} ${zlen}"></a-plane>
+                
+                    <!--outer wall-->
+                    <a-entity template="src: #outer-wall" data-width=${xlen} data-height=${ylen} position="0 ${ylen/2} ${-zlen/2}"></a-entity>
+                    <a-entity template="src: #outer-wall" data-width=${xlen} data-height=${ylen} position="0 ${ylen/2} ${zlen/2}"rotation="0 180 0"></a-entity>
+                    <a-entity template="src: #outer-wall" data-width=${zlen} data-height=${ylen} position="${-xlen/2} ${ylen/2} 0" rotation="0 90 0"></a-entity>
+                    <a-entity template="src: #outer-wall" data-width=${zlen} data-height=${ylen} position="${xlen/2} ${ylen/2} 0" rotation="0 -90 0"></a-entity>
+                    
+                    
+                    <!--inner wall-->
+                    <a-entity template="src: #inner-wall" position="0 0 0" data-width=${xlen} data-height=${ylen}></a-entity>
+
+                    <!--duct rail-->
+                    <a-entity template="src: #ductrail" position="${xlen/3} ${ylen} ${zlen/4}" data-above=${ylen/8} data-length=${zlen/2}></a-entity>
+                    <a-entity template="src: #ductrail" position="${-xlen/3} ${ylen} ${zlen/4}" data-above=${ylen/8} data-length=${zlen/2}></a-entity>
+                    <a-entity template="src: #ductrail" position="${xlen/3} ${ylen} ${-zlen/4}" data-above=${ylen/8} data-length=${zlen/2}></a-entity>
+                    <a-entity template="src: #ductrail" position="${-xlen/3} ${ylen} ${-zlen/4}" data-above=${ylen/8} data-length=${zlen/2}></a-entity>
+
+                    <!--<a-entity template="src: #spotlight" position="0 1.0 0"></a-entity>-->
+                    <!--ceil-->
+                    <a-box id="ceil" position="0 ${ylen} 0" scale="${xlen} 0.1 ${zlen}"></a-box>
+                </script>
+
 
                 <script id="panelTemplate" type="text/html">
                     <a-gui-flex-container set-container-color gui-interactable
@@ -46,16 +105,23 @@
                 </script>
             </a-assets>
 
-            <a-sky id="sky" position="0 55 0" radius="60" src="#sky-img"></a-sky>
-            <a-plane id="ground" position="0 0 0" rotation="-90 0 0" width="25" height="25" material="src: #ground-img; repeat: 10 10"></a-plane>
 
-            <a-plane position="0 0.01 0" rotation="-90 0 0" width="20" height="20"  material="src: #wood-floor-img; repeat: 10 10"></a-plane>
+            <!--sky-->
+            <!--<a-sky id="sky" position="0 55 0" radius="60" src="#sky-img"></a-sky>-->
+
+            <!--house-->
+            <a-entity template="src: #houseTemplate" data-xlen="10" data-ylen="6" data-zlen="20"></a-entity>
             
+            <!--panels-->
             <a-entity id="panels" layout="type: line; margin: 4" position="0 2 -3">
                 <a-entity template="src: #panelTemplate" data-title="3DMap" data-color="#FF0000" data-thumb="#map3d"></a-entity>
                 <a-entity template="src: #panelTemplate" data-title="RealSense" data-color="#00FF00" data-thumb="#realsense"></a-entity>
             </a-entity>
 
+            <!--ambient light-->
+            <a-light type="ambient" color="#E8E6E3"></a-light>
+
+            <!--cursor-->
             <a-camera look-controls wasd-controls>
                 <a-gui-cursor id="cursor" 
                         raycaster="interval: 200; objects: [gui-interactable]"
