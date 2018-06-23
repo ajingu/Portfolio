@@ -30,32 +30,37 @@
                 <a-asset-item id="indieFlower" src="Fonts/IndieFlower.json"></a-asset-item>         
 
                 <!--house components-->
-                <script id="inner-wall" type="text/html">                    
-                    <a-box position="${width/3} ${height/2} 0" scale="${width/3} ${height} 0.5">
-                        <a-box material="src: #wood-wall-img" position="0 -0.5 0" scale="1.02 0.05 1.02"></a-box>
-                    </a-box>
-                    <a-box position="0 ${height * 5 / 6} 0" scale="${width/3} ${height/3} 0.5"></a-box>
-                    <a-box position="${-width/3} ${height/2} 0" scale="${width/3} ${height} 0.5">
-                        <a-box material="src: #wood-wall-img" position="0 -0.5 0" scale="1.02 0.05 1.02"></a-box>
-                    </a-box>
+                <script id="base-wall" type="text/html">
+                    <a-plane material="color: #FFF;" position="0 0 0" width="${width}" height="${height}">
+                        <a-plane material="src: #wood-wall-img; repeat: 5 1" position="0 ${-height/2 + 0.08} 0.005" width="${width}" height="0.16"></a-plane>
+                    </a-plane>
                 </script>
 
-                <script id="outer-wall" type="text/html">
-                    <a-box material="color: #FFF;" position="0 0 0" scale="${width} ${height} 0.1">
-                        <a-box material="src: #wood-wall-img" position="0 -0.5 0.2" scale="1 0.05 1"></a-box>
-                    </a-box>
+                <script id="inner-wall" type="text/html">                    
+                    <a-entity template="src: #base-wall" position="${width/3} ${height/2} 0.5" data-width="${width/3}" data-height="${height}" ></a-entity>
+                    <a-entity template="src: #base-wall" position="${width/3} ${height/2} -0.5" rotation="0 180 0" data-width="${width/3}" data-height="${height}" ></a-entity>
+                    <a-entity template="src: #base-wall" position="${width/6} ${height/2} 0" rotation="0 -90 0" data-width="1" data-height="${height}" ></a-entity>
+
+                    <a-entity template="src: #base-wall" position="${-width/3} ${height/2} 0.5" data-width="${width/3}" data-height="${height}" ></a-entity>
+                    <a-entity template="src: #base-wall" position="${-width/3} ${height/2} -0.5" rotation="0 180 0" data-width="${width/3}" data-height="${height}" ></a-entity>
+                    <a-entity template="src: #base-wall" position="${-width/6} ${height/2} 0" rotation="0 90 0" data-width="1" data-height="${height}" ></a-entity>
                 </script>
 
                 <script id="ductrail" type="text/html">
-                    <a-box position="0 ${-above} 0" scale="0.2 0.1 ${length * 0.8}"></a-box>
-                    <a-cylinder position="0 ${-above/2} ${-length/4}" radius="0.04" height="${above}"></a-cylinder>
-                    <a-cylinder position="0 ${-above/2} ${length/4}" radius="0.04" height="${above}"></a-cylinder>
+                    <a-cylinder position="0 ${-above/2} ${-length/4}" radius="0.04" height="${above}" material="color: #000"></a-cylinder>
+                    <a-cylinder position="0 ${-above/2} ${length/4}" radius="0.04" height="${above}" material="color: #000"></a-cylinder>
+                    <a-box position="0 ${-above} 0" width="0.2" height="0.05" depth="${length * 0.8}" material="color: #000">
+                        <a-entity template="src: #spotlight" position="0 -0.2 ${length * 0.2}"></a-entity>
+                        <a-entity template="src: #spotlight" position="0 -0.2 ${-length * 0.2}"></a-entity>
+                    </a-box>
                 </script>
 
                 <script id="spotlight" type="text/html">
-                    <a-cylinder radius="0.1" height="0.2">
-                        <a-light type="spot" angle="30" distance="5.0" intensity="2.0" color="#EAE9D0" position="0 -0.1 0" rotation="-90 0 0"></a-light>
-                    </a-cylinder>
+                    <a-box material="color: #E5DEC0" width="0.05" height="0.2" depth="0.05">
+                        <a-cylinder material="color: #E5DEC0" position="0 -0.2 0" rotation="0 0 30" radius="0.1" height="0.3">
+                            <a-light type="spot" angle="30" distance="5.0" intensity="1.0" decay="2" color="#EAE9D0" position="0 -0.1 0" rotation="-90 0 0"></a-light>
+                        </a-cylinder>
+                    </a-box>
                 </script>
                 
 
@@ -65,24 +70,24 @@
                     <a-plane position="0 0 0" rotation="-90 0 0" width=${xlen} height=${zlen}  material="src: #wood-floor-img; repeat:${xlen} ${zlen}"></a-plane>
                 
                     <!--outer wall-->
-                    <a-entity template="src: #outer-wall" data-width=${xlen} data-height=${ylen} position="0 ${ylen/2} ${-zlen/2}"></a-entity>
-                    <a-entity template="src: #outer-wall" data-width=${xlen} data-height=${ylen} position="0 ${ylen/2} ${zlen/2}"rotation="0 180 0"></a-entity>
-                    <a-entity template="src: #outer-wall" data-width=${zlen} data-height=${ylen} position="${-xlen/2} ${ylen/2} 0" rotation="0 90 0"></a-entity>
-                    <a-entity template="src: #outer-wall" data-width=${zlen} data-height=${ylen} position="${xlen/2} ${ylen/2} 0" rotation="0 -90 0"></a-entity>
+                    <a-entity template="src: #base-wall" data-width=${xlen} data-height=${ylen} position="0 ${ylen/2} ${-zlen/2}"></a-entity>
+                    <a-entity template="src: #base-wall" data-width=${xlen} data-height=${ylen} position="0 ${ylen/2} ${zlen/2}"rotation="0 180 0"></a-entity>
+                    <a-entity template="src: #base-wall" data-width=${zlen} data-height=${ylen} position="${-xlen/2} ${ylen/2} 0" rotation="0 90 0"></a-entity>
+                    <a-entity template="src: #base-wall" data-width=${zlen} data-height=${ylen} position="${xlen/2} ${ylen/2} 0" rotation="0 -90 0"></a-entity>
                     
                     
                     <!--inner wall-->
                     <a-entity template="src: #inner-wall" position="0 0 0" data-width=${xlen} data-height=${ylen}></a-entity>
 
                     <!--duct rail-->
-                    <a-entity template="src: #ductrail" position="${xlen/3} ${ylen} ${zlen/4}" data-above=${ylen/8} data-length=${zlen/2}></a-entity>
-                    <a-entity template="src: #ductrail" position="${-xlen/3} ${ylen} ${zlen/4}" data-above=${ylen/8} data-length=${zlen/2}></a-entity>
-                    <a-entity template="src: #ductrail" position="${xlen/3} ${ylen} ${-zlen/4}" data-above=${ylen/8} data-length=${zlen/2}></a-entity>
-                    <a-entity template="src: #ductrail" position="${-xlen/3} ${ylen} ${-zlen/4}" data-above=${ylen/8} data-length=${zlen/2}></a-entity>
+                    <a-entity template="src: #ductrail" position="${xlen * 2 / 5} ${ylen} ${zlen/4}" data-above=${ylen/16} data-length=${zlen/2}></a-entity>
+                    <a-entity template="src: #ductrail" position="${-xlen * 2 / 5} ${ylen} ${zlen/4}" data-above=${ylen/16} data-length=${zlen/2} rotation="0 180 0"></a-entity>
+                    <a-entity template="src: #ductrail" position="${xlen * 2 / 5} ${ylen} ${-zlen/4}" data-above=${ylen/16} data-length=${zlen/2}></a-entity>
+                    <a-entity template="src: #ductrail" position="${-xlen/3} ${ylen} ${-zlen/4}" data-above=${ylen/16} data-length=${zlen/2} rotation="0 180 0"></a-entity>
 
-                    <!--<a-entity template="src: #spotlight" position="0 1.0 0"></a-entity>-->
+                    
                     <!--ceil-->
-                    <a-box id="ceil" position="0 ${ylen} 0" scale="${xlen} 0.1 ${zlen}"></a-box>
+                    <a-box id="ceil" position="0 ${ylen} 0" width="${xlen}" height="0.1" depth="${zlen}"></a-box>
                 </script>
 
 
@@ -110,7 +115,7 @@
             <!--<a-sky id="sky" position="0 55 0" radius="60" src="#sky-img"></a-sky>-->
 
             <!--house-->
-            <a-entity template="src: #houseTemplate" data-xlen="10" data-ylen="6" data-zlen="20"></a-entity>
+            <a-entity id="house" template="src: #houseTemplate" data-xlen="10" data-ylen="6" data-zlen="20"></a-entity>
             
             <!--panels-->
             <a-entity id="panels" layout="type: line; margin: 4" position="0 2 -3">
@@ -119,7 +124,7 @@
             </a-entity>
 
             <!--ambient light-->
-            <a-light type="ambient" color="#E8E6E3"></a-light>
+            <a-light type="ambient" color="#939290"></a-light>
 
             <!--cursor-->
             <a-camera look-controls wasd-controls>
