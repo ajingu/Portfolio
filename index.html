@@ -18,8 +18,10 @@
         <a-scene>
             <a-assets>
                 <!--image-->
-                <img id="map3d" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Images/3dmap.png">
-                <img id="realsense" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Images/realsense.png">
+                <img id="map3d" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Images/3dmap-min.png">
+                <img id="realsense" crossorigin="anonymous" src="https://rawgit.com/ajingu/Portfolio/master/Images/realsense-min.png">
+                <img id="worldpoll" crossorigin="anonymous" src="https://rawgit.com/ajingu/Portfolio/master/Images/WorldPoll.jpg">
+                <img id="portfolio" crossorigin="anonymous" src="https://rawgit.com/ajingu/Portfolio/master/Images/portfolio-min.png">
 
                 <!--texture-->
                 <img id="sky-img" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Textures/sky_lightblue-min.jpg">
@@ -98,7 +100,7 @@
                         opacity="0.0"
                         value="${value}"
                         font="kelsonsans"
-                        color="#48444C"
+                        color="#323035"
                         align="${align}"
                         animation__positionOpen="property: position; startEvents: textOpen; dur: 600; to: ${xpos} ${ypos} 0"
                         animation__opacityOpen="property: opacity; startEvents: textOpen; dur: 600; to: 1.0"
@@ -126,7 +128,7 @@
                             src=${thumb}>
                         </a-image>
 
-                        <a-entity template="src: #textTemplate" data-value="${date}" data-xpos="${-width/2-0.05}" data-ypos="${height*0.35}" data-align="right"></a-entity>
+                        <a-entity template="src: #textTemplate" data-value="${date}" data-xpos="${-width/2-0.05}" data-ypos="${height*0.3}" data-align="right"></a-entity>
                         <a-entity template="src: #textTemplate" data-value="${use}" data-xpos="${width/2+0.05}" data-ypos="${height*0.15}" data-align="left"></a-entity>
                         <a-entity template="src: #textTemplate" data-value="${desc}" data-xpos="0" data-ypos="${-height * 3 / 4}" data-align="center"></a-entity>
                     </a-gui-flex-container>
@@ -149,10 +151,22 @@
                     position="-5 1.8 7.5" rotation="0 90 0">
                 </a-entity>
                 <a-entity template="src: #panelTemplate" 
-                    data-title="RealSense" data-titlelen="9" data-titlecolor="#00FF00"
+                    data-title="RealSense" data-titlelen="9" data-titlecolor="#0DE5D7"
                     data-thumb="#realsense" data-width="2" data-height="1.5" 
                     data-date="Mar. 2018" data-use="Unity&#13;&#10;HTC Vive&#13;&#10;OpenCV" data-desc="PointCloud Viewer of RealSense"
                     position="-5 1.8 3" rotation="0 90 0">
+                </a-entity>
+                <a-entity template="src: #panelTemplate" 
+                    data-title="WorldPOLL" data-titlelen="9" data-titlecolor="#00FF00"
+                    data-thumb="#worldpoll" data-width="2" data-height="1.4" 
+                    data-date="Nov. 2017" data-use="Unity&#13;&#10;HoloLens&#13;&#10;Mapbox" data-desc="Worldwide Election"
+                    position="5 1.8 7.5" rotation="0 -90 0">
+                </a-entity>
+                <a-entity template="src: #panelTemplate" 
+                    data-title="PORTFOLIO" data-titlelen="9" data-titlecolor="#E2AF06"
+                    data-thumb="#portfolio" data-width="2" data-height="1.5" 
+                    data-date="Jun. 2018" data-use="HTML&#13;&#10;JavaScript&#13;&#10;A-Frame" data-desc="My Portfolio"
+                    position="5 1.8 3" rotation="0 -90 0">
                 </a-entity>
             </a-entity>
             
