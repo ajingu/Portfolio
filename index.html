@@ -27,8 +27,8 @@
                 <img id="wood-wall-img" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Textures/wood-wall-min.jpg">
                 
                 <!--font-->
-                <a-asset-item id="indieFlower" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Fonts/IndieFlower.json"></a-asset-item>         
-
+                <a-asset-item id="indieFlower" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Fonts/IndieFlower.json"></a-asset-item>   
+                
                 <!--house components-->
                 <script id="base-wall" type="text/html">
                     <a-plane material="color: #FFF;" position="0 0 0" width="${width}" height="${height}">
@@ -36,7 +36,7 @@
                     </a-plane>
                 </script>
 
-                <script id="inner-wall" type="text/html">                    
+                <script id="inner-wall" type="text/html">                
                     <a-entity template="src: #base-wall" position="${width/3} ${height/2} 0.5" data-width="${width/3}" data-height="${height}" ></a-entity>
                     <a-entity template="src: #base-wall" position="${width/3} ${height/2} -0.5" rotation="0 180 0" data-width="${width/3}" data-height="${height}" ></a-entity>
                     <a-entity template="src: #base-wall" position="${width/6} ${height/2} 0" rotation="0 -90 0" data-width="1" data-height="${height}" ></a-entity>
@@ -90,9 +90,26 @@
                     <a-box id="ceil" position="0 ${ylen} 0" width="${xlen}" height="0.1" depth="${zlen}"></a-box>
                 </script>
 
+                <!--text-->
+                <script id="textTemplate" type="text/html">
+                    <a-text class="textAnim"
+                        position="0 ${ypos} 0"
+                        width="5" height="2"
+                        opacity="0.0"
+                        value="${value}"
+                        font="kelsonsans"
+                        color="#48444C"
+                        align="${align}"
+                        animation__positionOpen="property: position; startEvents: textOpen; dur: 600; to: ${xpos} ${ypos} 0"
+                        animation__opacityOpen="property: opacity; startEvents: textOpen; dur: 600; to: 1.0"
+                        animation__positionClose="property: position; startEvents: textClose; dur: 600; from: ${xpos} ${ypos} 0; to: 0 ${ypos} 0"
+                        animation__opacityClose="property: opacity; startEvents: textClose; dur: 600; from: 1.0; to: 0.0">
+                    </a-text>
+                </script>
 
+                <!--panel-->
                 <script id="panelTemplate" type="text/html">
-                    <a-gui-flex-container set-text-anim gui-interactable
+                    <a-gui-flex-container set-text-anim
                         position="0 0 0.01"
                         width="${width}" height="${height}"
                         color="#FFF" transparent="true" opacity="0.0">
@@ -103,81 +120,15 @@
                             text-geometry="value: ${title}; size: 0.5; font: #indieFlower; bevelEnabled: true; bevelSize: 0.0001; bevelThickness: 0.01">
                         </a-entity>
 
-                        <a-image 
+                        <a-image rayTarget
                             position="0 0 0.01"
                             width="${width}" height="${height}" 
                             src=${thumb}>
                         </a-image>
 
-                        <a-text class="date"
-                            position="0 ${height*0.3} 0"
-                            width="5" height="2"
-                            opacity="0.0"
-                            value="Aug 2018">
-
-                            <a-animation attribute="position"
-                                begin="textOpen"
-                                dur="800"
-                                fill="forwards"
-                                to="${width*0.55} ${height*0.3} 0">
-                            </a-animation>
-
-                            <a-animation attribute="opacity"
-                                begin="textOpen"
-                                dur="800"
-                                fill="forwards"
-                                to="1.0">
-                            </a-animation>
-
-                            <a-animation attribute="position"
-                                begin="textClose"
-                                dur="800"
-                                fill="forwards"
-                                to="0 ${height*0.3} 0">
-                            </a-animation>
-
-                            <a-animation attribute="opacity"
-                                begin="textClose"
-                                dur="800"
-                                fill="forwards"
-                                to="0.0">
-                            </a-animation>
-                        </a-text>
-
-                        <a-text class="software"
-                            position="0 ${-height*0.2} 0"
-                            width="5" height="2"
-                            opacity="0.0"
-                            value="Unity&#13;&#10;ARKit&#13;&#10;Mapbox&#13;&#10;GoogleMaps">
-
-                            <a-animation attribute="position"
-                                begin="textOpen"
-                                dur="800"
-                                fill="forwards"
-                                to="${width*0.55} ${-height*0.2} 0">
-                            </a-animation>
-
-                            <a-animation attribute="opacity"
-                                begin="textOpen"
-                                dur="800"
-                                fill="forwards"
-                                to="1.0">
-                            </a-animation>
-
-                            <a-animation attribute="position"
-                                begin="textClose"
-                                dur="800"
-                                fill="forwards"
-                                to="0 ${-height*0.2} 0">
-                            </a-animation>
-
-                            <a-animation attribute="opacity"
-                                begin="textClose"
-                                dur="800"
-                                fill="forwards"
-                                to="0.0">
-                            </a-animation>
-                        </a-text>
+                        <a-entity template="src: #textTemplate" data-value="${date}" data-xpos="${-width/2-0.05}" data-ypos="${height*0.35}" data-align="right"></a-entity>
+                        <a-entity template="src: #textTemplate" data-value="${use}" data-xpos="${width/2+0.05}" data-ypos="${height*0.15}" data-align="left"></a-entity>
+                        <a-entity template="src: #textTemplate" data-value="${desc}" data-xpos="0" data-ypos="${-height * 3 / 4}" data-align="center"></a-entity>
                     </a-gui-flex-container>
                 </script>
             </a-assets>
@@ -190,22 +141,28 @@
             <a-entity id="house" template="src: #houseTemplate" data-xlen="10" data-ylen="6" data-zlen="20"></a-entity>
             
             <!--panels-->
-            <a-entity template="src: #panelTemplate" data-title="3DMap" data-titlelen="5" data-titlecolor="#FF0000" data-thumb="#map3d" data-width="2" data-height="1.5" position="-5 1.8 7.5" rotation="0 90 0"></a-entity>
-            <a-entity template="src: #panelTemplate" data-title="RealSense" data-titlelen="9" data-titlecolor="#00FF00" data-thumb="#realsense" data-width="2" data-height="1.5" position="-5 1.8 3" rotation="0 90 0"></a-entity>
+            <a-entity template="src: #panelTemplate" 
+                data-title="3DMap" data-titlelen="5" data-titlecolor="#FF0000" 
+                data-thumb="#map3d" data-width="2" data-height="1.5" 
+                data-date="Dec. 2017" data-use="Unity&#13;&#10;ARKit&#13;&#10;Mapbox&#13;&#10;GoogleMaps" data-desc="3-dimensional AR map"
+                position="-5 1.8 7.5" rotation="0 90 0">
+            </a-entity>
+            <a-entity template="src: #panelTemplate" 
+                data-title="RealSense" data-titlelen="9" data-titlecolor="#00FF00"
+                data-thumb="#realsense" data-width="2" data-height="1.5" 
+                data-date="Nov. 2017" data-use="Unity&#13;&#10;HTC Vive&#13;&#10;OpenCV" data-desc="PointCloud Viewer of RealSense"
+                position="-5 1.8 3" rotation="0 90 0">
+            </a-entity>
             
             <!--ambient light-->
             <a-light type="ambient" color="#939290"></a-light>
 
             <!--cursor-->
             <a-camera look-controls wasd-controls position="0 0 5" rotation="0 90 0">
-                <!--<a-gui-cursor id="cursor" 
-                        raycaster="interval: 200; objects: [gui-interactable]"
-                        design="dot">
-                </a-gui-cursor>-->
                 <a-cursor id="cursor"
                     event-set__1="_event: mouseenter; color: springgreen"
                     event-set__2="_event: mouseleave; color: black"
-                    raycaster="objects: [gui-interactable]; "></a-cursor>
+                    raycaster="objects: [rayTarget]; "></a-cursor>
             </a-camera>
 
         </a-scene>
