@@ -58,7 +58,7 @@
                 <script id="spotlight" type="text/html">
                     <a-box material="color: #E5DEC0" width="0.05" height="0.2" depth="0.05">
                         <a-cylinder material="color: #E5DEC0" position="0 -0.2 0" rotation="0 0 30" radius="0.1" height="0.3">
-                            <a-light type="spot" angle="35" distance="5.0" intensity="1.0" decay="2" color="#EAE9D0" position="0 -0.1 0" rotation="-90 0 0"></a-light>
+                            <a-light type="spot" angle="35" distance="5.0" intensity="2.0" decay="2" color="#EAE9D0" position="0 -0.1 0" rotation="-90 0 0"></a-light>
                         </a-cylinder>
                     </a-box>
                 </script>
@@ -141,21 +141,23 @@
             <a-entity id="house" template="src: #houseTemplate" data-xlen="10" data-ylen="6" data-zlen="20"></a-entity>
             
             <!--panels-->
-            <a-entity template="src: #panelTemplate" 
-                data-title="3DMap" data-titlelen="5" data-titlecolor="#FF0000" 
-                data-thumb="#map3d" data-width="2" data-height="1.5" 
-                data-date="Dec. 2017" data-use="Unity&#13;&#10;ARKit&#13;&#10;Mapbox&#13;&#10;GoogleMaps" data-desc="3-dimensional AR map"
-                position="-5 1.8 7.5" rotation="0 90 0">
-            </a-entity>
-            <a-entity template="src: #panelTemplate" 
-                data-title="RealSense" data-titlelen="9" data-titlecolor="#00FF00"
-                data-thumb="#realsense" data-width="2" data-height="1.5" 
-                data-date="Nov. 2017" data-use="Unity&#13;&#10;HTC Vive&#13;&#10;OpenCV" data-desc="PointCloud Viewer of RealSense"
-                position="-5 1.8 3" rotation="0 90 0">
+            <a-entity>
+                <a-entity template="src: #panelTemplate" 
+                    data-title="3DMap" data-titlelen="5" data-titlecolor="#FF0000" 
+                    data-thumb="#map3d" data-width="2" data-height="1.5" 
+                    data-date="Dec. 2017" data-use="Unity&#13;&#10;ARKit&#13;&#10;Mapbox&#13;&#10;GoogleMaps" data-desc="3-dimensional AR map"
+                    position="-5 1.8 7.5" rotation="0 90 0">
+                </a-entity>
+                <a-entity template="src: #panelTemplate" 
+                    data-title="RealSense" data-titlelen="9" data-titlecolor="#00FF00"
+                    data-thumb="#realsense" data-width="2" data-height="1.5" 
+                    data-date="Mar. 2018" data-use="Unity&#13;&#10;HTC Vive&#13;&#10;OpenCV" data-desc="PointCloud Viewer of RealSense"
+                    position="-5 1.8 3" rotation="0 90 0">
+                </a-entity>
             </a-entity>
             
             <!--ambient light-->
-            <a-light type="ambient" color="#939290"></a-light>
+            <a-light type="ambient" color="#60605E"></a-light>
 
             <!--cursor-->
             <a-camera look-controls wasd-controls position="0 0 5" rotation="0 90 0">
