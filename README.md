@@ -2,4 +2,5 @@
 Work in progress.
 
 ## Copyright
-・Wood Floor Texture & Wooden Stick Texture are <a href="http://www.freepik.com">Designed by Kjpargeter / Freepik</a>  
+・Wood Floor Texture & Wooden Stick Texture  <a href="http://www.freepik.com">Kjpargeter / Freepik</a>
+・Sounds  <a href="https://maoudamashii.jokersounds.com">魔王魂</a>

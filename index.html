@@ -27,6 +27,10 @@
                 <img id="sky-img" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Textures/sky_lightblue-min.jpg">
                 <img id="wood-floor-img" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Textures/wood-floor-min.jpg">
                 <img id="wood-wall-img" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Textures/wood-wall-min.jpg">
+
+                <!--sound-->
+                <audio id="door_se" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Sounds/door.mp3"></audio>
+                <audio id="click_se" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Sounds/click.mp3"></audio>
                 
                 <!--font-->
                 <a-asset-item id="indieFlower" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Fonts/IndieFlower.json"></a-asset-item>   
@@ -124,7 +128,8 @@
 
                         <a-image rayTarget
                             position="0 0 0.01"
-                            width="${width}" height="${height}" 
+                            width="${width}" height="${height}"
+                            sound="src: #click_se; on: mouseenter; volume: 0.5"
                             src=${thumb}>
                         </a-image>
 
@@ -135,9 +140,6 @@
                 </script>
             </a-assets>
 
-
-            <!--sky-->
-            <!--<a-sky id="sky" position="0 55 0" radius="60" src="#sky-img"></a-sky>-->
 
             <!--house-->
             <a-entity id="house" template="src: #houseTemplate" data-xlen="10" data-ylen="6" data-zlen="20"></a-entity>
@@ -175,12 +177,14 @@
 
             <!--cursor-->
             <a-camera look-controls wasd-controls position="0 0 5" rotation="0 90 0">
+                <a-sound src="#door_se" autoplay="true" volume="0.5"></a-sound>
                 <a-cursor id="cursor"
                     event-set__1="_event: mouseenter; color: springgreen"
                     event-set__2="_event: mouseleave; color: black"
                     raycaster="objects: [rayTarget]; "></a-cursor>
             </a-camera>
 
+            
         </a-scene>
     </body>
 </html>
