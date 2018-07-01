@@ -1,4 +1,4 @@
-# Portfoli
+# Portfolio
 My Portfolio site
 
 ## Copyright

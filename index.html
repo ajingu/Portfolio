@@ -7,7 +7,6 @@
         <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
         <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
         <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
-        <script src="https://npmcdn.com/aframe-layout-component@3.0.1"></script>
         <script src="https://npmcdn.com/aframe-template-component@3.1.1"></script>
         <script src="https://unpkg.com/aframe-text-geometry-component@^0.5.0/dist/aframe-text-geometry-component.min.js"></script> 
         <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
@@ -18,18 +17,19 @@
         <a-scene>
             <a-assets>
                 <!--image-->
+                <img id="portrait" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Images/portrait-min.png">
                 <img id="map3d" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Images/3dmap-min.png">
-                <img id="realsense" crossorigin="anonymous" src="https://rawgit.com/ajingu/Portfolio/master/Images/realsense-min.png">
-                <img id="worldpoll" crossorigin="anonymous" src="https://rawgit.com/ajingu/Portfolio/master/Images/WorldPoll.jpg">
-                <img id="portfolio" crossorigin="anonymous" src="https://rawgit.com/ajingu/Portfolio/master/Images/portfolio-min.png">
+                <img id="realsense" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Images/realsense-min.png">
+                <img id="worldpoll" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Images/WorldPoll.jpg">
+                <img id="portfolio" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Images/portfolio-min.png">
 
                 <!--texture-->
                 <img id="wood-floor-img" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Textures/wood-floor-min.jpg">
                 <img id="wood-wall-img" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Textures/wood-wall-min.jpg">
 
                 <!--sound-->
-                <audio id="door_se" src="https://rawgit.com/ajingu/Portfolio/master/Sounds/door.mp3"></audio>
-                <audio id="click_se" src="https://rawgit.com/ajingu/Portfolio/master/Sounds/click.mp3"></audio>
+                <audio id="door_se" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Sounds/door.mp3"></audio>
+                <audio id="click_se" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Sounds/click.mp3"></audio>
                 
                 <!--font-->
                 <a-asset-item id="indieFlower" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Fonts/IndieFlower.json"></a-asset-item>   
@@ -55,15 +55,15 @@
                     <a-cylinder position="0 ${-above/2} ${-length*0.3}" radius="0.04" height="${above}" material="color: #000"></a-cylinder>
                     <a-cylinder position="0 ${-above/2} ${length*0.3}" radius="0.04" height="${above}" material="color: #000"></a-cylinder>
                     <a-box position="0 ${-above} 0" width="0.2" height="0.05" depth="${length * 0.8}" material="color: #000">
-                        <a-entity template="src: #spotlight" position="0 -0.2 ${length * 0.22}"></a-entity>
-                        <a-entity template="src: #spotlight" position="0 -0.2 ${-length * 0.22}"></a-entity>
+                        <a-entity template="src: #spotlight" data-rotz="30" position="0 -0.2 ${length * 0.22}"></a-entity>
+                        <a-entity template="src: #spotlight" data-rotz="30" position="0 -0.2 ${-length * 0.22}"></a-entity>
                     </a-box>
                 </script>
 
                 <script id="spotlight" type="text/html">
                     <a-box material="color: #E5DEC0" width="0.05" height="0.2" depth="0.05">
-                        <a-cylinder material="color: #E5DEC0" position="0 -0.2 0" rotation="0 0 30" radius="0.1" height="0.3">
-                            <a-light type="spot" angle="35" distance="5.0" intensity="2.0" decay="2" color="#EAE9D0" position="0 -0.1 0" rotation="-90 0 0"></a-light>
+                        <a-cylinder material="color: #E5DEC0" position="0 -0.2 0" rotation="0 0 ${rotz}" radius="0.1" height="0.3">
+                            <a-light type="spot" angle="38" distance="5.0" intensity="3.0" decay="2" color="#EAE9D0" position="0 -0.1 0" rotation="-90 0 0"></a-light>
                         </a-cylinder>
                     </a-box>
                 </script>
@@ -148,13 +148,13 @@
                 <a-entity template="src: #panelTemplate" 
                     data-title="3DMap" data-titlelen="5" data-titlecolor="#FF0000" 
                     data-thumb="#map3d" data-width="2" data-height="1.5" 
-                    data-date="Dec. 2017" data-use="Unity&#13;&#10;ARKit&#13;&#10;Mapbox&#13;&#10;GoogleMaps" data-desc="3-dimensional AR map"
+                    data-date="Dec. 2017" data-use="Unity&#13;&#10;ARKit&#13;&#10;Mapbox&#13;&#10;Google Maps API" data-desc="3-dimensional AR map"
                     position="-5 1.8 7.5" rotation="0 90 0">
                 </a-entity>
                 <a-entity template="src: #panelTemplate" 
                     data-title="RealSense" data-titlelen="9" data-titlecolor="#0DE5D7"
                     data-thumb="#realsense" data-width="2" data-height="1.5" 
-                    data-date="Mar. 2018" data-use="Unity&#13;&#10;HTC Vive&#13;&#10;OpenCV" data-desc="PointCloud Viewer of RealSense"
+                    data-date="Mar. 2018" data-use="Unity&#13;&#10;Real Sense&#13;&#10;HTC Vive&#13;&#10;OpenCV" data-desc="PointCloud Viewer of RealSense"
                     position="-5 1.8 3" rotation="0 90 0">
                 </a-entity>
                 <a-entity template="src: #panelTemplate" 
@@ -170,12 +170,22 @@
                     position="5 1.8 3" rotation="0 -90 0">
                 </a-entity>
             </a-entity>
+
+            <!--portrait-->
+            <a-entity position="0 2.5 9.9" rotation="0 180 0">
+                <a-entity position="-1.5 1.3 0" material="color: #FFF; metalness: 0.5; roughness: 0.5" text-geometry="value: Arata Jingu; size: 0.5; font: #indieFlower; bevelEnabled: true; bevelSize: 0.01; bevelThickness: 0.01"></a-entity>
+                <a-image src="#portrait"  width="2" height="2" color="#FFF" transparent="true" opacity="0.5">   </a-image>
+                <a-text position="0 -1.5 0" value="Student, Creator, VR lover" font="kelsonsans" color="#323035" align="center"></a-text>
+            </a-entity>
             
-            <!--ambient light-->
-            <a-light type="ambient" color="#60605E"></a-light>
+            <!--light-->
+            <a-light type="ambient" color="#2B2A28"></a-light>
+            <a-light type="point" position="0 3 5" color="#25261F" intensity="0.5"></a-light>
+            <a-light type="point" position="0 -3 5" color="#25261F" intensity="0.5"></a-light>
+            <a-entity template="src: #spotlight" data-rotz="50" position="0 5.9 7.5" rotation="0 -90 0"></a-entity>
 
             <!--cursor-->
-            <a-camera look-controls wasd-controls position="0 0 5" rotation="0 90 0">
+            <a-camera look-controls wasd-controls position="0 0 1" rotation="0 180 0">
                 <a-sound src="#door_se" autoplay="true" volume="0.5"></a-sound>
                 <a-cursor id="cursor"
                     event-set__1="_event: mouseenter; color: springgreen"
