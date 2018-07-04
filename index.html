@@ -4,16 +4,31 @@
         <meta charset="utf-8">
         <title>Ajingu Gallery</title>
         <meta name="description" content="Ajingu's Portfolio">
+        
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="js/main.js"></script>
+        
         <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
         <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
         <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
         <script src="https://npmcdn.com/aframe-template-component@3.1.1"></script>
         <script src="https://unpkg.com/aframe-text-geometry-component@^0.5.0/dist/aframe-text-geometry-component.min.js"></script> 
         <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
-        <script src="set-text-anim.js"></script>
 
+        <script src="js/set-text-anim.js"></script>
+        <script src="js/set-loading-fadeout.js"></script>
     </head>
     <body>
+        <div id="loader-bg">
+            <div id="loader">
+                <img src="https://cdn.rawgit.com/ajingu/Portfolio/master/gif/img-loading.gif" width="80" height="12" alt="Now Loading..." />
+                <p>Now Loading...</p>
+            </div>
+        </div>
+        <audio id="bgm" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Sounds/bgm.mp3" loop></audio>
+
         <a-scene>
             <a-assets>
                 <!--image-->
@@ -28,8 +43,7 @@
                 <img id="wood-wall-img" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Textures/wood-wall-min.jpg">
 
                 <!--sound-->
-                <audio id="door_se" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Sounds/door.mp3"></audio>
-                <audio id="click_se" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Sounds/click.mp3"></audio>
+                <audio id="click_se" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Sounds/click.mp3"></audio>
                 
                 <!--font-->
                 <a-asset-item id="indieFlower" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Fonts/IndieFlower.json"></a-asset-item>   
@@ -114,7 +128,7 @@
 
                 <!--panel-->
                 <script id="panelTemplate" type="text/html">
-                    <a-gui-flex-container set-text-anim
+                    <a-gui-flex-container class="container" set-text-anim
                         position="0 0 0.01"
                         width="${width}" height="${height}"
                         color="#FFF" transparent="true" opacity="0.0">
@@ -128,7 +142,7 @@
                         <a-image rayTarget
                             position="0 0 0.01"
                             width="${width}" height="${height}"
-                            sound="src: #click_se; on: mouseenter; volume: 0.5"
+                            sound="src: #click_se; on: mouseenter; volume: 0.8; poolSize: 1"
                             src=${thumb}>
                         </a-image>
 
@@ -182,18 +196,15 @@
             <a-light type="ambient" color="#2B2A28"></a-light>
             <a-light type="point" position="0 3 5" color="#25261F" intensity="0.5"></a-light>
             <a-light type="point" position="0 -3 5" color="#25261F" intensity="0.5"></a-light>
-            <a-entity template="src: #spotlight" data-rotz="50" position="0 5.9 7.5" rotation="0 -90 0"></a-entity>
+            <a-entity template-load-complete template="src: #spotlight" data-rotz="50" position="0 5.9 7.5" rotation="0 -90 0"></a-entity>
 
             <!--cursor-->
             <a-camera look-controls wasd-controls position="0 0 1" rotation="0 180 0">
-                <a-sound src="#door_se" autoplay="true" volume="0.5"></a-sound>
                 <a-cursor id="cursor"
                     event-set__1="_event: mouseenter; color: springgreen"
                     event-set__2="_event: mouseleave; color: black"
                     raycaster="objects: [rayTarget]; "></a-cursor>
             </a-camera>
-
-            
         </a-scene>
     </body>
 </html>
