@@ -17,4 +17,3 @@ AFRAME.registerComponent("set-text-anim", {
         });
     }
 });
-
