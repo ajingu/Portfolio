@@ -40,7 +40,6 @@
 
                 <!--texture-->
                 <img id="wood-floor-img" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Textures/wood-floor-min.jpg">
-                <img id="wood-wall-img" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Textures/wood-wall-min.jpg">
 
                 <!--sound-->
                 <audio id="click_se" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Sounds/click.mp3"></audio>
@@ -51,7 +50,7 @@
                 <!--house components-->
                 <script id="base-wall" type="text/html">
                     <a-plane material="color: #FFF;" position="0 0 0" width="${width}" height="${height}">
-                        <a-plane material="src: #wood-wall-img; repeat: 5 1" position="0 ${-height/2 + 0.08} 0.005" width="${width}" height="0.16"></a-plane>
+                        <a-plane material="color: #7C5B2B" position="0 ${-height/2 + 0.08} 0.005" width="${width}" height="0.16"></a-plane>
                     </a-plane>
                 </script>
 
