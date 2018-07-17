@@ -37,6 +37,8 @@
                 <img id="realsense" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Images/realsense-min.png">
                 <img id="worldpoll" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Images/WorldPoll.jpg">
                 <img id="portfolio" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Images/portfolio-min.png">
+                <img id="leaplat" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Images/leaplat-min.png">
+                <img id="article" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Images/ArticleClassifier-min.png">
 
                 <!--texture-->
                 <img id="wood-floor-img" crossorigin="anonymous" src="https://cdn.rawgit.com/ajingu/Portfolio/master/Textures/wood-floor-min.jpg">
@@ -179,8 +181,20 @@
                 <a-entity template="src: #panelTemplate" 
                     data-title="PORTFOLIO" data-titlelen="9" data-titlecolor="#E2AF06"
                     data-thumb="#portfolio" data-width="2" data-height="1.5" 
-                    data-date="Jun. 2018" data-use="HTML&#13;&#10;JavaScript&#13;&#10;A-Frame" data-desc="My Portfolio"
+                    data-date="Jun. 2018" data-use="HTML&#13;&#10;CSS&#13;&#10;JavaScript&#13;&#10;A-Frame" data-desc="My Portfolio"
                     position="5 1.8 3" rotation="0 -90 0">
+                </a-entity>
+                <a-entity template="src: #panelTemplate" 
+                    data-title="Leaplat" data-titlelen="6" data-titlecolor="#6837D3"
+                    data-thumb="#leaplat" data-width="2" data-height="1.5" 
+                    data-date="Jul. 2018" data-use="Unity&#13;&#10;Leap Motion&#13;&#10;OpenCV" data-desc="Splatoon-like AR game"
+                    position="5 1.8 -3" rotation="0 -90 0">
+                </a-entity>
+                <a-entity template="src: #panelTemplate" 
+                    data-title="Article CLF" data-titlelen="9" data-titlecolor="#0F97E0"
+                    data-thumb="#article" data-width="2" data-height="1.5" 
+                    data-date="Jul. 2017" data-use="Python&#13;&#10;MySQL" data-desc="Automatic Category Classifier&#13;&#10;by Machine Learning"
+                    position="5 1.8 -7.5" rotation="0 -90 0">
                 </a-entity>
             </a-entity>
 
@@ -195,7 +209,9 @@
             <a-light type="ambient" color="#2B2A28"></a-light>
             <a-light type="point" position="0 3 5" color="#25261F" intensity="0.5"></a-light>
             <a-light type="point" position="0 -3 5" color="#25261F" intensity="0.5"></a-light>
+            <a-entity template-load-complete template="src: #spotlight" data-rotz="50" position="0 5.9 -7.5" rotation="0 90 0"></a-entity>
             <a-entity template-load-complete template="src: #spotlight" data-rotz="50" position="0 5.9 7.5" rotation="0 -90 0"></a-entity>
+
 
             <!--cursor-->
             <a-camera look-controls wasd-controls position="0 0 1" rotation="0 180 0">
